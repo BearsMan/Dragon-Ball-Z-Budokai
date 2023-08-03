@@ -9,8 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public float gravity = 20f;
     private float verticalVelocity;
     private bool isGrounded;
-    public int kiPowerUp = 0;
-    public CharacterController controller;
+    private CharacterController controller;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +31,8 @@ public class PlayerMovement : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticialInput = Input.GetAxis("Vertical");
-        Vector3 moveDirection = transform.TransformDirection(new Vector3(horizontalInput, 0, verticialInput));
+        Vector3 moveDirection = (transform.forward * verticialInput + transform.right * horizontalInput).normalized;
+        moveDirection *= moveSpeed;
         controller.Move(moveDirection * Time.deltaTime);
     }
     public void ApplyGravity()
