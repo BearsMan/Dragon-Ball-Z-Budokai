@@ -16,9 +16,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private Rigidbody rb;
-    private bool isGrounded;
-    private bool isFlying;
-    private bool isAttacking;
+    private bool isGrounded = false;
+    private bool isFlying = false;
+    private bool isAttacking = false;
 
     private void Awake()
     {
