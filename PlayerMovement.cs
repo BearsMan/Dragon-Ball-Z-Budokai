@@ -40,9 +40,13 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             if (isGrounded)
+            {
                 Jump();
+            }
             else
+            {
                 ToggleFlying();
+            }
         }
     }
 
