@@ -6,8 +6,9 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Transform orignalCam;
-    public CinemachineVirtualCamera Cam;
+    public Transform getAxisCustom;
     public Transform objectToFollow;
+    public CinemachineVirtualCamera Cam;
     public MidPoint midPoint;
     public float zoomOffSet;
     private Vector3 Dist;
