@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform cam;
-    public Transform getAxisCustom;
+    public Transform orignalCam;
     public CinemachineVirtualCamera Cam;
     public Transform objectToFollow;
     public MidPoint midPoint;
@@ -20,6 +19,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //TODO: Fix camera midpoint and offsets to allow character to move around
         /*
         if (midPoint.Dist > 4f && midPoint.dist < 15)
         {
