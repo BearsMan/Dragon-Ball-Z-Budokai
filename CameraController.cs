@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
     public CinemachineVirtualCamera Cam;
     public MidPoint midPoint;
     public float zoomOffSet;
-    private Vector3 Dist;
+    private Vector3 dist;
     // Start is called before the first frame update
     void Start()
     {
