@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
@@ -24,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
     }
+
 
     private void Update()
     {
@@ -49,12 +51,11 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
     private void Move(Vector2 moveInput)
     {
         // Apply horizontal movement
         Vector3 moveDirection = transform.forward * moveInput.y * moveSpeed;
-        rb.velocity = new Vector3(moveDirection.x, rb.velocity.y, moveDirection.z);
+        rb.linearVelocity = new Vector3(moveDirection.x, rb.linearVelocity.y, moveDirection.z);
 
         // Handle rotation
         if (moveInput.x != 0f)
@@ -68,15 +69,14 @@ public class PlayerMovement : MonoBehaviour
         {
             float verticalInput = Input.GetAxis("Vertical");
             Vector3 flyDirection = transform.up * verticalInput * flySpeed;
-            rb.velocity = new Vector3(rb.velocity.x, flyDirection.y, rb.velocity.z);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, flyDirection.y, rb.linearVelocity.z);
         }
     }
 
     private void Jump()
     {
-        rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
     }
-
     private void ToggleFlying()
     {
         if (isFlying)
@@ -87,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             rb.useGravity = false;
-            rb.velocity = Vector3.zero;
+            rb.linearVelocity = Vector3.zero;
             rb.AddForce(Vector3.up * flyForce, ForceMode.Impulse);
             isFlying = true;
         }
