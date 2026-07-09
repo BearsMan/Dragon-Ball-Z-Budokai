@@ -1,0 +1,65 @@
+diff --git a/CLAUDE.md b/CLAUDE.md
+new file mode 100644
+index 0000000..a863387
+--- /dev/null
++++ b/CLAUDE.md
+@@ -0,0 +1,59 @@
++# CLAUDE.md
++
++This file gives Claude Code project-specific guidance for this repository.
++
++## Project overview
++
++Dragon-Ball-Z-Budokai is a Unity/C# fighting-game prototype inspired by Dragon Ball Z: Budokai. The current repo is small and script-focused, with Unity scene/assets metadata and core player/combat controller scripts at the repository root.
++
++## Tech stack
++
++- Unity project
++- C# scripts using `UnityEngine`
++- Visual Studio solution: `Dragonball Z Budokai.sln`
++
++## Repository structure
++
++- `DragonBallZBudokai.unity` — main Unity scene.
++- `PlayerMovement.cs` — main Budokai-style player controller, combat states, attack data, movement, guard, ki charge, teleport, combo buffering, hit reactions, and KO logic.
++- `FighterMovement.cs` — simple target-facing movement script.
++- `CameraController.cs`, `MidPoint.cs`, `AudioObject.cs`, `GameManager.cs` — supporting gameplay scripts.
++- `.github/workflows/` — GitHub Actions workflows.
++
++## Coding guidelines
++
++- Keep scripts compatible with Unity C# conventions.
++- Prefer clear serialized fields with `[Header]`, `[SerializeField]`, and Unity-friendly public configuration fields where Inspector tuning is intended.
++- Avoid hardcoding character-specific logic when data-driven `AttackData` or serialized references can be used.
++- Preserve existing gameplay concepts: Budokai-style auto-facing, sidestepping, guard, ki charging, teleporting, combo chains, launches, knockback, wall hits, and KO states.
++- Use coroutines for short timed gameplay sequences when consistent with the current codebase.
++- Do not rename public fields, animator parameters, Unity input names, scene objects, or serialized classes without considering prefab/scene serialization breakage.
++- When changing animator logic, document required Animator parameters and animation events in comments or README updates.
++- Keep null checks around optional Unity references such as opponent transforms, animators, and attack data.
++
++## Common Unity concerns
++
++- Unity serialization depends on class names, namespaces, and field names. Be cautious when refactoring `MonoBehaviour` classes.
++- `PlayerMovement.cs` currently declares `BudokaiPlayerController`; file/class name mismatches can confuse Unity workflows. Do not introduce more mismatches.
++- Prefer `GetComponent<T>()` over non-generic `GetComponent()`.
++- Avoid doing expensive object searches in `Update()`.
++- Use `Time.deltaTime` for frame-rate-independent movement.
++
++## Testing and validation
++
++There is no automated test suite currently documented. For gameplay changes, validate in Unity by checking:
++
++- The scene opens without missing script errors.
++- Player and opponent references are assigned.
++- Movement axes and input buttons match Unity Input Manager mappings.
++- Animator parameters used by scripts exist.
++- Combo windows fire through animation events: `EnableComboWindow`, `DisableComboWindow`, `OnAttackHit`, and `EndAttack`.
++- Hit reactions, launch, teleport, guard, ki charge, and KO states behave correctly during play mode.
++
++## Recommended tasks for future cleanup
++
++- Format C# files with standard multi-line C# formatting.
++- Add a real `README.md` with setup instructions, Unity version, controls, and known limitations.
++- Move scripts into a `Scripts/` folder if Unity metadata is updated safely.
++- Add defensive checks and editor-time validation for required references.
++- Consider replacing old Unity Input Manager calls with the new Input System if the project standardizes on it.
